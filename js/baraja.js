@@ -1,0 +1,164 @@
+
+let parejasAcertadas = [];
+let numImgVisibles = 0;
+let puntos = 0;
+window.onload = grid;
+
+function grid() {
+	cargarImagenes();
+	scorePartida();
+
+	//NIVEL DIFICULTAD
+	let modal = document.getElementById("modal-content");
+	let buttons = modal.childNodes;
+	buttons.forEach(button => {
+		button.onclick = dificultad;
+	});
+}
+
+function dificultad() {
+	switch (this.id) {
+		case "facil":
+			generarCartas(4, 8, frutas);
+			break;
+		case "medio":
+			generarCartas(6, 18, pokemon);
+			break;
+		case "dificil":
+			generarCartas(8, 32, coches);
+			break;
+	}
+	document.getElementById("modal").style.display = "none";
+	//CRONOMETRO
+	inicio();
+}
+
+function generarCartas(valorDificultad, numImg, tematica) {
+	let parentElement = document.getElementById("wrapper");
+	let numElements = valorDificultad * valorDificultad;
+	let listaImagenes = imagenes(numImg, tematica);
+
+	for (let i = 0; i < numElements; i++) {
+		let item = document.createElement('DIV');
+		item.setAttribute("class", "grid-item");
+		parentElement.appendChild(item);
+
+		//IMG		
+		let img = document.createElement('INPUT');
+		img.setAttribute("type", "image");
+		img.setAttribute("src", reverso);
+		//img.setAttribute("src", listaImagenes[i]);
+		img.setAttribute("visible", false);		
+		img.onclick = function () {			
+			if (img.getAttribute("visible") == "false") {
+				img.setAttribute("src", listaImagenes[i]);
+				img.setAttribute("visible", true);
+				numImgVisibles++;
+			}
+
+			comprobarParejas();
+			scorePartida();
+		}
+		item.appendChild(img);
+	}
+
+	parentElement.style.setProperty('--rowNum', valorDificultad);
+	parentElement.style.setProperty('--colNum', valorDificultad);
+}
+
+function imagenes(numImg, tematica) {
+	let imagenes = [];
+	let i = 0;
+	while (i < numImg) {
+		let nuevaImagen = tematica[getAleatorio(tematica)];
+		if (!imagenes.includes(nuevaImagen)) {
+			imagenes[i] = nuevaImagen;
+			i++;
+		}
+	}
+	return mezclarImagenes(imagenes, numImg);
+}
+
+function mezclarImagenes(imagenes, numImg) {
+	let baraja = [];
+	baraja.length = numImg * 2;
+
+	let i = 0
+	while (i < baraja.length) {
+		let nuevaImagen = imagenes[getAleatorio(imagenes)];
+		if (!baraja.includes(nuevaImagen) || contarRepeticiones(baraja, nuevaImagen) < 2) {
+			baraja[i] = nuevaImagen;
+			i++;
+		}
+	}
+	return baraja;
+}
+
+function contarRepeticiones(lista, imagen) {
+	let repeticiones = 0;
+	for (let i = 0; i < lista.length; i++) {
+		if (lista[i] == imagen) {
+			repeticiones++;
+		}
+	}
+	return repeticiones;
+}
+
+function comprobarParejas() {
+	if (numImgVisibles == 2) {
+		bloquearPanel(true);
+		parar();
+
+		let parejas = [];
+		numImgVisibles = 0;
+
+		let imagenes = document.getElementsByTagName("INPUT");
+		for (let i = 0; i < imagenes.length; i++) {
+			if (!parejasAcertadas.includes(imagenes[i].getAttribute("src")) & imagenes[i].getAttribute("visible") == "true") {
+				parejas.push(imagenes[i]);
+			}
+		}
+
+		if (parejas[0].getAttribute("src") != parejas[1].getAttribute("src")) {
+			if (puntos != 0)
+				puntos--;
+
+			setTimeout(
+				function () {
+					parejas[0].setAttribute("src", reverso);
+					parejas[0].setAttribute("visible", false);
+					parejas[1].setAttribute("src", reverso);
+					parejas[1].setAttribute("visible", false);
+					bloquearPanel(false);
+				},
+				1000
+			);
+		}
+		else {
+			parejasAcertadas.push(parejas[0].getAttribute("src"));
+			puntos += 10;
+			bloquearPanel(false);
+		}
+	}
+}
+
+function getAleatorio(tematica) {
+	return Math.floor(Math.random() * (tematica.length - 0));
+}
+
+function ocultarImagenes(parejas) {
+	parejas[0].setAttribute("src", reverso);
+	parejas[1].setAttribute("src", reverso);
+}
+
+function bloquearPanel(bloquear) {
+	let imagenes = document.getElementsByTagName("INPUT");
+	for (let i = 0; i < imagenes.length; i++) {
+		imagenes[i].disabled = bloquear;
+	}
+}
+
+function scorePartida() {
+	let divScore = document.getElementById("score");
+	divScore.innerHTML = "<div>Puntos: " + puntos + "</div>"
+}

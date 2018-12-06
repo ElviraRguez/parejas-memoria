@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/main.css">
+    <title> Encuentra la pareja </title>
+</head>
+
+<body>
+    <div id="modal" class="modalDialog">
+        <!--<div class="modal-header">
+            Seleccione un nivel de dificultad
+        </div> -->
+        <div id="modal-content" class="modal-content">
+            <h3> Seleccione un nivel de dificultad </h3>
+            <button id="facil"> Fácil </button>
+            <button id="medio"> Medio </button>
+            <button id="dificil"> Dificil </button>
+        </div>
+    </div>
+    <div class="container">
+        <div id="score" class="puntos"></div>
+        <div id="cronometro" class="cronometro">
+            <div class="reloj" id="Horas">00</div>
+            <div class="reloj" id="Minutos">:00</div>
+            <div class="reloj" id="Segundos">:00</div>
+            <!--<div class="reloj" id="Centesimas">:00</div>-->
+        </div>
+        <div id="wrapper" class="wrapper"></div>
+    </div>
+
+    <div id="f1_container">
+        <div id="f1_card" class="shadow">
+            <div class="front face">
+                <img src="img/reverso.png" />
+            </div>
+            <div class="back face center">
+                <img src="img/pokemon/arcanine.png"/>
+            </div>
+        </div>
+    </div>
+    <script src="js/cronometro.js"></script>
+    <script src="js/imagenes.js"></script>
+    <script src="js/baraja.js"></script>
+</body>
+
+</html>
