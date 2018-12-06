@@ -68,12 +68,16 @@ body {
 
 .grid-item {
     grid-column-start: auto;
-    grid-row-start: auto;
+    grid-row-start: auto;    
+}
+
+.grid-item > input[type='image'] {
+    background: white;    
+    border-radius: 12px;
 }
 
 .grid-item > input:hover {
-    border: 2px solid black;
-    border-radius: 12px;
+    border: 2px solid black;    
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
@@ -88,11 +92,10 @@ body {
 .grid-item > input:disabled {
     opacity: 0.8;
     border: none;
-    border-radius: 0px;
     box-shadow: none;
 }
 
-/* MODAL INICIO */
+/* MODAL INICIAL */
 .modalDialog {
     display: block;
     position: fixed;
@@ -110,11 +113,24 @@ body {
 }
 
 .modal-content {
-    width: 80%;
-    margin: 10% auto;
-    padding: 20px;
-    border-radius: 10px;
+    width: 60%; /*TAMAÑOS PEQUEÑOS SUBIR A 80% */
+    margin: 5% auto;
+    border-radius: 5px;
     background: #fff;
-    display: grid;
     text-align: center;
+
+    display: grid;
+    gap: 5px;
+}
+
+.modal-header {
+    padding-top: 3%;
+    font-family: 'good-times';
+    font-weight: bold;
+}
+
+.modal-body {
+    display: grid;
+    padding: 3%;    
+    grid-auto-flow: column;
 }

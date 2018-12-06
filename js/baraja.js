@@ -9,7 +9,7 @@ function grid() {
 	scorePartida();
 
 	//NIVEL DIFICULTAD
-	let modal = document.getElementById("modal-content");
+	let modal = document.getElementById("modal-body");
 	let buttons = modal.childNodes;
 	buttons.forEach(button => {
 		button.onclick = dificultad;
@@ -17,14 +17,18 @@ function grid() {
 }
 
 function dificultad() {
+	let baraja = document.getElementById("wrapper");
 	switch (this.id) {
 		case "facil":
+			baraja.classList.add("facil");
 			generarCartas(4, 8, frutas);
 			break;
 		case "medio":
+			baraja.classList.add("medio");
 			generarCartas(6, 18, pokemon);
 			break;
 		case "dificil":
+			baraja.classList.add("dificil");
 			generarCartas(8, 32, coches);
 			break;
 	}

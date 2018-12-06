@@ -1,0 +1,34 @@
+/*VARIABLES*/
+:root {
+    --gridHeight: auto;
+    --gridWidht: auto;
+}
+
+/*MODAL INICIAL */
+.modal-content {
+    width: 80%;
+}
+
+/* GRID */
+.wrapper {
+    padding: 2%;
+    gap: 15px;
+}
+
+.grid-item > input:hover {
+    border: none;    
+    box-shadow: none;
+}
+
+.grid-item > input[type='image']{
+    height: 80px;
+    width: 80px;
+}
+
+.grid-item > input[visible='true'] {
+    transform:scale(1.15);
+    -ms-transform:scale(1.15); /* IE 9  */
+    -moz-transform:scale(1.15); /* Firefox */
+    -webkit-transform:scale(1.15); /* Safari and Chrome */
+    -o-transform:scale(1.15); /* Opera */
+}
