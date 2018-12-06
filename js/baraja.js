@@ -1,7 +1,7 @@
-
 let parejasAcertadas = [];
 let numImgVisibles = 0;
 let puntos = 0;
+let partidaIniciada = false;
 window.onload = grid;
 
 function grid() {
@@ -29,8 +29,7 @@ function dificultad() {
 			break;
 	}
 	document.getElementById("modal").style.display = "none";
-	//CRONOMETRO
-	inicio();
+	cronometrar();
 }
 
 function generarCartas(valorDificultad, numImg, tematica) {
@@ -47,7 +46,6 @@ function generarCartas(valorDificultad, numImg, tematica) {
 		let img = document.createElement('INPUT');
 		img.setAttribute("type", "image");
 		img.setAttribute("src", reverso);
-		//img.setAttribute("src", listaImagenes[i]);
 		img.setAttribute("visible", false);		
 		img.onclick = function () {			
 			if (img.getAttribute("visible") == "false") {
@@ -107,7 +105,7 @@ function contarRepeticiones(lista, imagen) {
 function comprobarParejas() {
 	if (numImgVisibles == 2) {
 		bloquearPanel(true);
-		parar();
+		cronometrar();
 
 		let parejas = [];
 		numImgVisibles = 0;
@@ -130,6 +128,7 @@ function comprobarParejas() {
 					parejas[1].setAttribute("src", reverso);
 					parejas[1].setAttribute("visible", false);
 					bloquearPanel(false);
+					cronometrar();
 				},
 				1000
 			);
@@ -138,6 +137,7 @@ function comprobarParejas() {
 			parejasAcertadas.push(parejas[0].getAttribute("src"));
 			puntos += 10;
 			bloquearPanel(false);
+			cronometrar();
 		}
 	}
 }
@@ -161,4 +161,16 @@ function bloquearPanel(bloquear) {
 function scorePartida() {
 	let divScore = document.getElementById("score");
 	divScore.innerHTML = "<div>Puntos: " + puntos + "</div>"
+}
+
+//CRONOMETRO(EL EL FICHERO CRONOMETRO.JS)
+function cronometrar() {
+	if(partidaIniciada) {
+		partidaIniciada = false;
+		parar();
+	}
+	else {		
+		partidaIniciada = true;
+		inicio();
+	}
 }
