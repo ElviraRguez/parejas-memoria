@@ -60,6 +60,11 @@ function generarCartas(valorDificultad, numImg, tematica) {
 
 			comprobarParejas();
 			scorePartida();
+			
+			if(parejasAcertadas.length == numImg) {
+				cronometrar();
+				scoreTable();
+			}
 		}
 		item.appendChild(img);
 	}
