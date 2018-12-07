@@ -64,6 +64,7 @@ function generarCartas(valorDificultad, numImg, tematica) {
 			if(parejasAcertadas.length == numImg) {
 				cronometrar();
 				scoreTable();
+				guardarPuntuacion(document.getElementById("modal-score-body"));
 			}
 		}
 		item.appendChild(img);
@@ -168,8 +169,8 @@ function bloquearPanel(bloquear) {
 }
 
 function scorePartida() {
-	let divScore = document.getElementById("score");
-	divScore.innerHTML = "<div>Puntos: " + puntos + "</div>"
+	let divScore = document.getElementById("puntosValue");
+	divScore.innerHTML = puntos;
 }
 
 //CRONOMETRO(EL EL FICHERO CRONOMETRO.JS)

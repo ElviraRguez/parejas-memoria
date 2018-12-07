@@ -131,6 +131,38 @@ body {
 
 .modal-body {
     display: grid;
-    padding: 3%;    
     grid-auto-flow: column;
+    gap: 10px;
+    padding: 3%;    
+}
+
+/*MODAL PUNTOS*/
+.modal-score-body {
+    display: grid;
+    justify-content: space-around;
+    padding: 2%;
+}
+
+.tabla {
+    grid-auto-flow: column;    
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.titlePtos {
+    font-family: 'good-times';
+    font-size: small;
+}
+
+/*BOTONES*/
+.btn {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 7px 15px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }
