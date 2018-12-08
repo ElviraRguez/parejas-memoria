@@ -149,6 +149,11 @@ body {
     grid-template-columns: 1fr 1fr 1fr;
 }
 
+.footer {
+    margin: 5% 5% 0 10%;
+    gap: 12px;
+}
+
 .titlePtos {
     font-family: 'good-times';
     font-size: small;
@@ -156,7 +161,7 @@ body {
 
 /*BOTONES*/
 .btn {
-  background-color: #4CAF50; /* Green */
+  background-color: #4CAF50;
   border: none;
   color: white;
   padding: 7px 15px;
@@ -165,4 +170,10 @@ body {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+}
+
+.btn:hover {
+    background-color: #4CAF50;
+    border: 3px solid darkgreen;
+    padding: 4px 12px;
 }
