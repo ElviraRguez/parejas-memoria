@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    <!-- Modal inicial -->
     <div id="modal" class="modalDialog">
         <div class="modal-content">
             <div class="modal-header"> Seleccione un nivel de dificultad </div>
@@ -16,9 +17,52 @@
                 <button id="facil" class="btn"> Fácil </button>
                 <button id="medio" class="btn"> Medio </button>
                 <button id="dificil" class="btn"> Dificil </button>
+                <hr>
+                <button id="tablaPuntuaciones" class="btn neutral"> Ver tabla de puntuaciones </button>
+            </div>            
+        </div>
+    </div>
+
+    <!-- Modal guardar partida -->
+    <div id="modalScore" class="hide">
+        <div class="modal-content">
+            <div class="modal-header"> Tabla de puntuaciones </div>
+            <div id="modal-score-body" class="modal-score-body">
+                <div class='tabla'>
+                    <label class='titlePtos'>Nombre</label>
+                    <label class='titlePtos'>Puntos</label>
+                    <label class='titlePtos'>Tiempo</label>
+                </div>
+                <div class="tabla">
+                    <input id="nombreJugador" type="text">
+                    <label id="puntosPartida"></label>
+                    <label id="tiempoPartida"></label>
+                </div>
+                <div class="tabla footer">
+                    <div></div>
+                    <button id="guardarJugador" class="btn">Guardar</button>
+                    <button id="cancelar" class="btn cancel">Cancelar</button>
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- Modal tabla partidas -->
+    <div id="modalTableScore" class="hide">
+        <div class="modal-content">
+            <div class="modal-header"> Tabla de puntuaciones </div>
+            <div id="modalTableScoreBody" class="modal-score-body">
+                <div id="tPartidas" class="modal-score-body"></div>
+                <div class='tPartidas footer'>
+                    <div></div>
+                    <div></div>
+                    <button id='juegoNuevo' class='btn'>Nueva partida</button>
+                    <button id='cerrar' class='btn cancel'>Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <div id="score" class="puntos">
             Puntos: <span id="puntosValue"></span>

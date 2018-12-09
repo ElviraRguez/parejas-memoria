@@ -31,15 +31,16 @@ function dificultad() {
 			baraja.classList.add("dificil");
 			generarCartas(8, 32, coches);
 			break;
+		case "tablaPuntuaciones":
+			historialPartidas();
+			break;
 	}
 	document.getElementById("modal").style.display = "none";
-	cronometrar();
-	//BORRAR
-	scoreTable("modalScore", "modal-score-body");
-	guardarPuntuacion(document.getElementById("modal-score-body"));
+	//guardarPuntuacion();
 }
 
-function generarCartas(valorDificultad, numImg, tematica) {
+function generarCartas(valorDificultad, numImg, tematica) {	
+	cronometrar();
 	let parentElement = document.getElementById("wrapper");
 	let numElements = valorDificultad * valorDificultad;
 	let listaImagenes = imagenes(numImg, tematica);
@@ -66,8 +67,7 @@ function generarCartas(valorDificultad, numImg, tematica) {
 			
 			if(parejasAcertadas.length == numImg) {
 				cronometrar();
-				scoreTable("modalScore", "modal-score-body");
-				guardarPuntuacion(document.getElementById("modal-score-body"));
+				guardarPuntuacion();
 			}
 		}
 		item.appendChild(img);

@@ -39,49 +39,17 @@ class Partida {
     }
 }
 
-function scoreTable(general, body) {
-    let modal = document.createElement('DIV');
-    modal.id = general;
-    modal.setAttribute("class", "modalDialog");
-    document.getElementsByTagName('BODY')[0].appendChild(modal);
-
-    let modalContent = document.createElement('DIV');
-    modalContent.setAttribute("class", "modal-content");
-    modal.appendChild(modalContent);
-
-    let modalHeader = document.createElement('DIV');
-    modalHeader.setAttribute("class", "modal-header");
-    modalHeader.innerHTML = "Tabla de puntuaciones";
-    modalContent.appendChild(modalHeader);
-
-    let modalBody = document.createElement('DIV');
-    modalBody.id = body;
-    modalBody.setAttribute("class", "modal-score-body");
-    modalContent.appendChild(modalBody);
-}
-
-function guardarPuntuacion(modal) {
-    modal.innerHTML = "<div class='tabla'><label class='titlePtos'>Nombre</label><label class='titlePtos'>Puntos</label><label class='titlePtos'>Tiempo</label></div>";
-
-    let cuerpoTabla = document.createElement('DIV');
-    cuerpoTabla.setAttribute("class", "tabla");
-    modal.appendChild(cuerpoTabla);
-
-    let nuevaPartida = document.createElement("INPUT");
-    nuevaPartida.id = "nombreJugador";
-    nuevaPartida.setAttribute("type", "text");
-    cuerpoTabla.appendChild(nuevaPartida);
+function guardarPuntuacion() {
+    document.getElementById("modalScore").setAttribute("class", "modalDialog");
+    let nuevaPartida = document.getElementById("nombreJugador");
+    nuevaPartida.value = "";
     nuevaPartida.focus();
 
-    let lblPuntos = document.createElement('LABEL');
+    let lblPuntos = document.getElementById("puntosPartida");
     lblPuntos.innerHTML = document.getElementById("puntosValue").innerHTML;
-    cuerpoTabla.appendChild(lblPuntos);
 
-    let lblTiempo = document.createElement('LABEL');
+    let lblTiempo = document.getElementById("tiempoPartida");
     lblTiempo.innerHTML = document.getElementById("Minutos").innerHTML + "" + document.getElementById("Segundos").innerHTML;
-    cuerpoTabla.appendChild(lblTiempo);
-
-    modal.innerHTML += "<div class='tabla footer'><div></div><button id='guardarJugador' class='btn'>Guardar</button><button id='cancelar' class='btn'>Cancelar</button></div>";
 
     document.getElementById("guardarJugador").onclick = function () {
         let nombreJugador = document.getElementById("nombreJugador").value;
@@ -94,18 +62,26 @@ function guardarPuntuacion(modal) {
 
     document.getElementById("cancelar").onclick = function () {
         document.getElementById("modalScore").style.display = "none";
+        historialPartidas();
     };
 }
 
 function historialPartidas() {
-    scoreTable("modalTableScore", "modalTableScoreBody");
+    document.getElementById("modalTableScore").setAttribute("class", "modalDialog");
     let historial = JSON.parse(localStorage.getItem("partidas"));
-    let parentContent = document.getElementById("modalTableScoreBody");
     ordenar(historial);
 
     historial.forEach(partida => {
-        getPartida(Object.values(partida).toString(), parentContent);
+        getPartida(Object.values(partida).toString());
     });
+    
+    document.getElementById("juegoNuevo").onclick = function () {
+        location.reload();
+    };
+
+    document.getElementById("cerrar").onclick = function () {
+        document.getElementById("modalTableScore").style.display = "none";
+    };
 }
 
 //LOCALSTORAGE
@@ -119,7 +95,7 @@ function webStorage(valor) {
     localStorage.setItem("partidas", JSON.stringify(webStorage));
 }
 
-function getPartida(partida, contentParent) {
+function getPartida(partida) {
     let contenedor = document.createElement('DIV');
     contenedor.setAttribute("class", "tPartidas");
     let comaPos = partida.indexOf(",");
@@ -130,7 +106,7 @@ function getPartida(partida, contentParent) {
     }
 
     contenedor.innerHTML += "<label>" + partida + "</label>";
-    contentParent.appendChild(contenedor);
+    document.getElementById("tPartidas").appendChild(contenedor);
 }
 
 function intercambiar(array, element1, element2) {

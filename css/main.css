@@ -68,12 +68,15 @@ body {
 
 .grid-item {
     grid-column-start: auto;
-    grid-row-start: auto;    
+    grid-row-start: auto;     
 }
 
 .grid-item > input[type='image'] {
     background: white;    
-    border-radius: 12px;
+    border-radius: 12px; 
+    
+    -webkit-animation: rotate 2s linear 0s 1 normal ;
+    animation: rotate 2s linear 0s 1 normal ;
 }
 
 .grid-item > input:hover {
@@ -81,7 +84,13 @@ body {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
+.grid-item > input[visible='false'] {    
+    transition: transform 1s linear;
+}
+
 .grid-item > input[visible='true'] {
+    transition: transform 1s linear;
+
     transform:scale(1.2);
     -ms-transform:scale(1.2); /* IE 9  */
     -moz-transform:scale(1.2); /* Firefox */
@@ -100,7 +109,6 @@ body {
     display: block;
     position: fixed;
     z-index: 1;
-    padding-top: 100px;
     left: 0;
     top: 0;
     width: 100%;
@@ -110,6 +118,10 @@ body {
     -webkit-transition: opacity 400ms ease-in;
 	-moz-transition: opacity 400ms ease-in;
 	transition: opacity 400ms ease-in;
+}
+
+.hide {
+    display: none;
 }
 
 .modal-content {
@@ -182,5 +194,25 @@ body {
 .btn:hover {
     background-color: #4CAF50;
     border: 3px solid darkgreen;
+    padding: 4px 12px;
+}
+
+.btn.cancel {
+    background-color: firebrick;
+}
+
+.btn.cancel:hover {
+    background-color: firebrick;
+    border: 3px solid darkred;
+    padding: 4px 12px;
+}
+
+.btn.neutral {
+    background-color: gray;
+}
+
+.btn.neutral:hover {
+    background-color: gray;
+    border: 3px solid darkslategray;
     padding: 4px 12px;
 }
