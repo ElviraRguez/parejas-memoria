@@ -1,7 +1,7 @@
 /*VARIABLES*/
 :root {
-    --gridHeight: auto;
-    --gridWidht: auto;
+    --gridHeight: 100px;
+    --gridWidht: 100px;
 }
 
 /*MODAL INICIAL */
@@ -12,17 +12,12 @@
 /* GRID */
 .wrapper {
     padding: 2%;
-    gap: 15px;
-}
-
-.grid-item > input:hover {
-    border: none;    
-    box-shadow: none;
+    gap: 20px;
 }
 
 .grid-item > input[type='image']{
-    height: 80px;
-    width: 80px;
+    height: var(--gridHeight);
+    width: var(--gridWidht);
 }
 
 .grid-item > input[visible='true'] {

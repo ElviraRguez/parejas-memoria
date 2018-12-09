@@ -3,8 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" media="(max-width: 1024px)" href="css/style1024.css" />
+    <link rel="stylesheet" href="css/main.css"/>    
+    <link rel="stylesheet" media="(min-width: 1280px) and (max-width: 1400px) and (orientation: landscape)" href="css/mediumWindows.css" />
+    <link rel="stylesheet" media="(min-width: 1024px) and (max-width: 1280px) and (orientation: landscape)" href="css/smallWindows.css" />
+    <link rel="stylesheet" media="(max-width: 1024px) or (orientation: portrait)" href="css/verticalWindows.css" />
     <title> Encuentra la pareja </title>
 </head>
 
@@ -26,7 +28,7 @@
     <!-- Modal guardar partida -->
     <div id="modalScore" class="hide">
         <div class="modal-content">
-            <div class="modal-header"> Tabla de puntuaciones </div>
+            <div class="modal-header">  Guardar puntuación </div>
             <div id="modal-score-body" class="modal-score-body">
                 <div class='tabla'>
                     <label class='titlePtos'>Nombre</label>
@@ -56,7 +58,6 @@
                 <div class='tPartidas footer'>
                     <div></div>
                     <div></div>
-                    <button id='juegoNuevo' class='btn'>Nueva partida</button>
                     <button id='cerrar' class='btn cancel'>Cerrar</button>
                 </div>
             </div>

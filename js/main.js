@@ -35,7 +35,7 @@ function dificultad() {
 			historialPartidas();
 			break;
 	}
-	document.getElementById("modal").style.display = "none";
+	document.getElementById("modal").setAttribute("class", "hide");
 	//guardarPuntuacion();
 }
 

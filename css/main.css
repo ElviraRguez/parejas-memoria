@@ -79,8 +79,8 @@ body {
     animation: rotate 2s linear 0s 1 normal ;
 }
 
-.grid-item > input:hover {
-    border: 2px solid black;    
+.grid-item > input[visible='false']:hover {
+    border: 2px solid darkviolet;    
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 

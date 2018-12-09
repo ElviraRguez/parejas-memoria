@@ -1,0 +1,31 @@
+/*VARIABLES*/
+:root {
+    --gridHeight: 80px;
+    --gridWidht: 80px;
+}
+
+/*MODAL INICIAL */
+.modal-content {
+    width: 95%;
+}
+
+/* GRID */
+.wrapper {
+    padding: 3%;
+    gap: 18px;
+}
+
+.grid-item > input[type='image']{
+    height: var(--gridHeight);
+    width: var(--gridWidht);
+}
+
+/*BOTONES*/
+.btn {
+    padding: 4px 7px;
+    font-size: 14px;
+}
+
+.btn:hover, .btn.cancel:hover, .btn.neutral:hover {
+    padding: 1px 4px;
+}

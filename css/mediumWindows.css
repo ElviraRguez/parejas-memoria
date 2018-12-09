@@ -1,0 +1,24 @@
+/*VARIABLES*/
+:root {
+    --gridHeight: 110px;
+    --gridWidht: 110px;
+}
+
+/* GRID */
+.wrapper {
+    padding: 2%;
+    gap: 22px;
+}
+
+.grid-item > input[type='image']{
+    height: var(--gridHeight);
+    width: var(--gridWidht);
+}
+
+.grid-item > input[visible='true'] {
+    transform:scale(1.15);
+    -ms-transform:scale(1.15); /* IE 9  */
+    -moz-transform:scale(1.15); /* Firefox */
+    -webkit-transform:scale(1.15); /* Safari and Chrome */
+    -o-transform:scale(1.15); /* Opera */
+}

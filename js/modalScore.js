@@ -56,12 +56,12 @@ function guardarPuntuacion() {
         let fechaActual = new Date();
         fechaActual = fechaActual.getDate() + "/" + (fechaActual.getMonth() +1) + "/" + fechaActual.getFullYear();
         webStorage(new Partida(nombreJugador, lblPuntos.innerHTML, lblTiempo.innerHTML, fechaActual));
-        document.getElementById("modalScore").style.display = "none";
+        document.getElementById("modalScore").setAttribute("class", "hide");
         historialPartidas();
     };
 
     document.getElementById("cancelar").onclick = function () {
-        document.getElementById("modalScore").style.display = "none";
+        document.getElementById("modalScore").setAttribute("class", "hide");
         historialPartidas();
     };
 }
@@ -75,12 +75,8 @@ function historialPartidas() {
         getPartida(Object.values(partida).toString());
     });
     
-    document.getElementById("juegoNuevo").onclick = function () {
-        location.reload();
-    };
-
     document.getElementById("cerrar").onclick = function () {
-        document.getElementById("modalTableScore").style.display = "none";
+        location.reload();
     };
 }
 
