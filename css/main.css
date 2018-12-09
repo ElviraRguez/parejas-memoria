@@ -28,6 +28,7 @@ body {
     gap: 10px;
     grid-template-areas: "maxPuntos puntos cronometro"
                          "baraja baraja baraja";
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 /*PUNTOS*/
@@ -170,10 +171,14 @@ body {
 }
 
 /*MODAL PARTIDAS*/
+.modal-tscore-body {
+    display: grid;
+    padding: 2%;
+}
+
 .tPartidas {
     grid-auto-flow: column;    
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 2fr;
 }
 
 /*BOTONES*/

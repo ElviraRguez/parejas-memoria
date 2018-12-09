@@ -7,6 +7,10 @@
     <link rel="stylesheet" media="(min-width: 1280px) and (max-width: 1400px) and (orientation: landscape)" href="css/mediumWindows.css" />
     <link rel="stylesheet" media="(min-width: 1024px) and (max-width: 1280px) and (orientation: landscape)" href="css/smallWindows.css" />
     <link rel="stylesheet" media="(max-width: 1024px) or (orientation: portrait)" href="css/verticalWindows.css" />
+    
+    <link rel="stylesheet" href="plugin/introJS/introjs.css">
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+
     <title> Encuentra la pareja </title>
 </head>
 
@@ -15,12 +19,15 @@
     <div id="modal" class="modalDialog">
         <div class="modal-content">
             <div class="modal-header"> Seleccione un nivel de dificultad </div>
-            <div id="modal-body" class="modal-body">
+            <div data-step="1" data-intro="Seleccione un nivel de dificultad para jugar." id="modal-body" class="modal-body">
                 <button id="facil" class="btn"> Fácil </button>
                 <button id="medio" class="btn"> Medio </button>
                 <button id="dificil" class="btn"> Dificil </button>
                 <hr>
                 <button id="tablaPuntuaciones" class="btn neutral"> Ver tabla de puntuaciones </button>
+                <button class="btn neutral" onclick="">
+                    <i class="fa fa-question-circle" aria-hidden="true"></i>
+                </button>
             </div>
         </div>
     </div>
@@ -53,35 +60,37 @@
     <div id="modalTableScore" class="hide">
         <div class="modal-content">
             <div class="modal-header"> Tabla de puntuaciones </div>
-            <div id="modalTableScoreBody" class="modal-score-body">
-                <div id="tPartidas" class="modal-score-body"></div>
+            <div id="modalTableScoreBody" class="modal-tscore-body">
+                <div id="tPartidas" class="modal-tscore-body"></div>
                 <div class='tPartidas footer'>
                     <div></div>
+                    <button id='limpiar' class='btn cancel'>Limpiar puntuaciones</button>
+                    <button id='cerrar' class='btn cancel'>Cerrar</button>                    
                     <div></div>
-                    <button id='cerrar' class='btn cancel'>Cerrar</button>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="container">
-        <div id="maxScore" class="maxPuntos">
+        <div data-step="2" data-intro="Puntuación máxima registrada." id="maxScore" class="maxPuntos">
             Puntuación Max.: <span id="puntosMaxValue">0</span>
         </div>
-        <div id="score" class="puntos">
+        <div data-step="3" data-intro="Puntos obtenidos durante la partida." id="score" class="puntos">
             Puntos: <span id="puntosValue">0</span>
         </div>
-        <div id="cronometro" class="cronometro">
+        <div data-step="4" data-intro="Tiempo de juego." id="cronometro" class="cronometro">
             <div class="reloj" id="Minutos">00</div>
             <div class="reloj" id="Segundos">:00</div>
         </div>
-        <div id="wrapper" class="wrapper"></div>
+        <div data-step="5" data-intro="Tablero de parejas, gira las cartas hasta encontrar todas las parejas." id="wrapper" class="wrapper"></div>
     </div>
 
     <script src="js/cronometro.js"></script>
     <script src="js/imagenes.js"></script>
     <script src="js/modalScore.js"></script>
     <script src="js/main.js"></script>
+    <script src="plugin/introJS/intro.js"></script>
 </body>
 
 </html>

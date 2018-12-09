@@ -75,6 +75,11 @@ function historialPartidas() {
         getPartida(Object.values(partida).toString());
     });
     
+    document.getElementById("limpiar").onclick = function () {
+        localStorage.clear();
+        location.reload();
+    };
+
     document.getElementById("cerrar").onclick = function () {
         location.reload();
     };

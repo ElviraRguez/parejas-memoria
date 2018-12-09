@@ -207,3 +207,5 @@ function setMaxPuntos() {
 	let maxScore = document.getElementById("puntosMaxValue");
 	maxScore.innerHTML = maxPuntos;
 }
+
+function help() {introJs().start();}
