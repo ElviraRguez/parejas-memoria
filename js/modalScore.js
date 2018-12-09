@@ -63,15 +63,12 @@ function scoreTable(general, body) {
 function guardarPuntuacion(modal) {
     modal.innerHTML = "<div class='tabla'><label class='titlePtos'>Nombre</label><label class='titlePtos'>Puntos</label><label class='titlePtos'>Tiempo</label></div>";
 
-    /*let form = document.createElement('FORM');    
-    form.setAttribute("class", "tabla");
-    modal.appendChild(form);*/
-
     let cuerpoTabla = document.createElement('DIV');
     cuerpoTabla.setAttribute("class", "tabla");
     modal.appendChild(cuerpoTabla);
 
     let nuevaPartida = document.createElement("INPUT");
+    nuevaPartida.id = "nombreJugador";
     nuevaPartida.setAttribute("type", "text");
     cuerpoTabla.appendChild(nuevaPartida);
     nuevaPartida.focus();
@@ -87,11 +84,10 @@ function guardarPuntuacion(modal) {
     modal.innerHTML += "<div class='tabla footer'><div></div><button id='guardarJugador' class='btn'>Guardar</button><button id='cancelar' class='btn'>Cancelar</button></div>";
 
     document.getElementById("guardarJugador").onclick = function () {
-        //TODO recoger nombre jugador
-        console.log(nuevaPartida);
+        let nombreJugador = document.getElementById("nombreJugador").value;
         let fechaActual = new Date();
         fechaActual = fechaActual.getDate() + "/" + (fechaActual.getMonth() +1) + "/" + fechaActual.getFullYear();
-        webStorage(new Partida(nuevaPartida.value, lblPuntos.innerHTML, lblTiempo.innerHTML, fechaActual));
+        webStorage(new Partida(nombreJugador, lblPuntos.innerHTML, lblTiempo.innerHTML, fechaActual));
         document.getElementById("modalScore").style.display = "none";
         historialPartidas();
     };

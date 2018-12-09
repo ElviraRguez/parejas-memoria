@@ -34,6 +34,9 @@ function dificultad() {
 	}
 	document.getElementById("modal").style.display = "none";
 	cronometrar();
+	//BORRAR
+	scoreTable("modalScore", "modal-score-body");
+	guardarPuntuacion(document.getElementById("modal-score-body"));
 }
 
 function generarCartas(valorDificultad, numImg, tematica) {
