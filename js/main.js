@@ -6,7 +6,7 @@ window.onload = grid;
 
 function grid() {
 	cargarImagenes();
-	scorePartida();
+	//scorePartida();
 
 	//NIVEL DIFICULTAD
 	let modal = document.getElementById("modal-body");
@@ -36,7 +36,6 @@ function dificultad() {
 			break;
 	}
 	document.getElementById("modal").setAttribute("class", "hide");
-	//guardarPuntuacion();
 }
 
 function generarCartas(valorDificultad, numImg, tematica) {	

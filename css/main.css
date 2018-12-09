@@ -26,22 +26,24 @@ body {
     display: grid;
     text-align: center;
     gap: 10px;
-    grid-template-areas: "puntos . cronometro"
+    grid-template-areas: "maxPuntos puntos cronometro"
                          "baraja baraja baraja";
 }
 
 /*PUNTOS*/
+.maxPuntos {
+    grid-area: maxPuntos;
+    font-family: good-times;
+}
+
 .puntos {
     grid-area: puntos;
     font-family: good-times;
-
-    background-color: pink;
 }
 
 /*CRONOMETRO*/
 .cronometro {
     grid-area: cronometro;
-    background-color: aquamarine;
 }
 
 .reloj {
@@ -60,10 +62,6 @@ body {
     grid-template-rows: repeat(var(--rowNum), var(--gridHeight));
     grid-template-columns: repeat(var(--colNum), var(--gridWidht));
     gap: 30px;
-
-    background-color: lightcoral;
-    border: 2px solid black;
-    border-radius: 15px;
 }
 
 .grid-item {

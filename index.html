@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/main.css"/>    
+    <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" media="(min-width: 1280px) and (max-width: 1400px) and (orientation: landscape)" href="css/mediumWindows.css" />
     <link rel="stylesheet" media="(min-width: 1024px) and (max-width: 1280px) and (orientation: landscape)" href="css/smallWindows.css" />
     <link rel="stylesheet" media="(max-width: 1024px) or (orientation: portrait)" href="css/verticalWindows.css" />
@@ -21,14 +21,14 @@
                 <button id="dificil" class="btn"> Dificil </button>
                 <hr>
                 <button id="tablaPuntuaciones" class="btn neutral"> Ver tabla de puntuaciones </button>
-            </div>            
+            </div>
         </div>
     </div>
 
     <!-- Modal guardar partida -->
     <div id="modalScore" class="hide">
         <div class="modal-content">
-            <div class="modal-header">  Guardar puntuación </div>
+            <div class="modal-header"> Guardar puntuación </div>
             <div id="modal-score-body" class="modal-score-body">
                 <div class='tabla'>
                     <label class='titlePtos'>Nombre</label>
@@ -65,6 +65,9 @@
     </div>
 
     <div class="container">
+        <div id="maxScore" class="maxPuntos">
+            Puntuación Max.: <span id="puntosMaxValue">0</span>
+        </div>
         <div id="score" class="puntos">
             Puntos: <span id="puntosValue"></span>
         </div>
