@@ -6,42 +6,42 @@ class Partida {
         this._fecha = fecha;
     }
 
-    set nombre (value) {
+    set nombre(value) {
         return this._nombre = value;
     }
 
-    get nombre () {
+    get nombre() {
         return this._nombre;
     }
 
-    set puntos (value) {
+    set puntos(value) {
         return this._puntos = value;
     }
 
-    get puntos () {
+    get puntos() {
         return this._puntos;
     }
 
-    set tiempo (value) {
+    set tiempo(value) {
         return this._tiempo = value;
     }
 
-    get tiempo () {
+    get tiempo() {
         return this._tiempo;
     }
 
-    set fecha (value) {
+    set fecha(value) {
         return this._fecha = value;
     }
 
-    get fecha () {
+    get fecha() {
         return this._fecha;
     }
 }
 
-function scoreTable() {
+function scoreTable(general, body) {
     let modal = document.createElement('DIV');
-    modal.id = "modalScore";
+    modal.id = general;
     modal.setAttribute("class", "modalDialog");
     document.getElementsByTagName('BODY')[0].appendChild(modal);
 
@@ -55,12 +55,12 @@ function scoreTable() {
     modalContent.appendChild(modalHeader);
 
     let modalBody = document.createElement('DIV');
-    modalBody.id = "modal-score-body";
+    modalBody.id = body;
     modalBody.setAttribute("class", "modal-score-body");
     modalContent.appendChild(modalBody);
 }
 
-function guardarPuntuacion(modal) {        
+function guardarPuntuacion(modal) {
     modal.innerHTML = "<div class='tabla'><label class='titlePtos'>Nombre</label><label class='titlePtos'>Puntos</label><label class='titlePtos'>Tiempo</label></div>";
 
     /*let form = document.createElement('FORM');    
@@ -86,15 +86,30 @@ function guardarPuntuacion(modal) {
 
     modal.innerHTML += "<div class='tabla footer'><div></div><button id='guardarJugador' class='btn'>Guardar</button><button id='cancelar' class='btn'>Cancelar</button></div>";
 
-    document.getElementById("guardarJugador").onclick = function() {
+    document.getElementById("guardarJugador").onclick = function () {
         //TODO recoger nombre jugador
         console.log(nuevaPartida);
-        webStorage(new Partida(nuevaPartida.value, lblPuntos.innerHTML, lblTiempo.innerHTML, new Date()));
+        let fechaActual = new Date();
+        fechaActual = fechaActual.getDate() + "/" + (fechaActual.getMonth() +1) + "/" + fechaActual.getFullYear();
+        webStorage(new Partida(nuevaPartida.value, lblPuntos.innerHTML, lblTiempo.innerHTML, fechaActual));
+        document.getElementById("modalScore").style.display = "none";
+        historialPartidas();
     };
 
-    document.getElementById("cancelar").onclick = function() {
+    document.getElementById("cancelar").onclick = function () {
         document.getElementById("modalScore").style.display = "none";
     };
+}
+
+function historialPartidas() {
+    scoreTable("modalTableScore", "modalTableScoreBody");
+    let historial = JSON.parse(localStorage.getItem("partidas"));
+    let parentContent = document.getElementById("modalTableScoreBody");
+    ordenar(historial);
+
+    historial.forEach(partida => {
+        getPartida(Object.values(partida).toString(), parentContent);
+    });
 }
 
 //LOCALSTORAGE
@@ -108,15 +123,50 @@ function webStorage(valor) {
     localStorage.setItem("partidas", JSON.stringify(webStorage));
 }
 
-function getHistorial() {
-    let historial = JSON.parse(localStorage.getItem("partidas")).toString();
-    let historialElement = document.getElementById("historial");
-    historialElement.innerText = "";
-    let comaPos = historial.indexOf(",");
+function getPartida(partida, contentParent) {
+    let contenedor = document.createElement('DIV');
+    contenedor.setAttribute("class", "tPartidas");
+    let comaPos = partida.indexOf(",");
     while (comaPos != -1) {
-        historialElement.innerHTML += "<p>" + historial.substr(0, comaPos).replace(/\r?\n/g, "<br>") + "</p>";
-        historial = historial.substr(comaPos + 1);
-        comaPos = historial.indexOf(",");
+        contenedor.innerHTML += "<label>" + partida.substr(0, comaPos) + "</label>"
+        partida = partida.substr(comaPos + 1);
+        comaPos = partida.indexOf(",");
     }
-    historialElement.innerHTML += "<p>" + historial.replace(/\r?\n/g, "<br>") + "</p>";
+
+    contenedor.innerHTML += "<label>" + partida + "</label>";
+    contentParent.appendChild(contenedor);
+}
+
+function intercambiar(array, element1, element2) {
+    var tmp = array[element1];
+    array[element1] = array[element2];
+    array[element2] = tmp;
+    return array;
+}
+
+function ordenar(historial) {
+    var size = historial.length;
+    for (let partida = 1; partida < size; partida++) {
+        for (let i = 0; i < (size - partida); i++) {
+            var sig = i + 1;
+            if (historial[i]._puntos < historial[sig]._puntos) {
+                intercambiar(historial, i, sig);
+            }
+
+            if (historial[i]._puntos == historial[sig]._puntos) {
+                if (historial[i]._tiempo > historial[sig]._tiempo){
+                    intercambiar(historial, i, sig);
+                }
+
+                if(historial[i]._tiempo == historial[sig]._tiempo){
+                    let fecha = new Date(historial[i]._fecha);
+                    let fechaSig = new Date(historial[sig]._fecha);
+                    if(fecha.getTime() < fechaSig.getTime()) {
+                        intercambiar(historial, i, sig);
+                    }
+                }
+            }
+        }
+    }
+    return historial;
 }

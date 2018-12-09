@@ -159,6 +159,13 @@ body {
     font-size: small;
 }
 
+/*MODAL PARTIDAS*/
+.tPartidas {
+    grid-auto-flow: column;    
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 2fr;
+}
+
 /*BOTONES*/
 .btn {
   background-color: #4CAF50;

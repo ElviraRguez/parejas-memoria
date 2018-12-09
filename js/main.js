@@ -63,7 +63,7 @@ function generarCartas(valorDificultad, numImg, tematica) {
 			
 			if(parejasAcertadas.length == numImg) {
 				cronometrar();
-				scoreTable();
+				scoreTable("modalScore", "modal-score-body");
 				guardarPuntuacion(document.getElementById("modal-score-body"));
 			}
 		}
