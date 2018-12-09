@@ -1,12 +1,14 @@
 let parejasAcertadas = [];
 let numImgVisibles = 0;
+
 let puntos = 0;
+let maxPuntos = 0;
 let partidaIniciada = false;
 window.onload = grid;
 
 function grid() {
 	cargarImagenes();
-	//scorePartida();
+	getMaxPuntos();
 
 	//NIVEL DIFICULTAD
 	let modal = document.getElementById("modal-body");
@@ -63,7 +65,7 @@ function generarCartas(valorDificultad, numImg, tematica) {
 
 			comprobarParejas();
 			scorePartida();
-			
+						
 			if(parejasAcertadas.length == numImg) {
 				cronometrar();
 				guardarPuntuacion();
@@ -130,8 +132,10 @@ function comprobarParejas() {
 		}
 
 		if (parejas[0].getAttribute("src") != parejas[1].getAttribute("src")) {
-			if (puntos != 0)
+			if (puntos != 0) {
 				puntos--;
+				getMaxPuntos();
+			}
 
 			setTimeout(
 				function () {
@@ -149,6 +153,7 @@ function comprobarParejas() {
 			parejasAcertadas.push(parejas[0].getAttribute("src"));
 			puntos += 10;
 			bloquearPanel(false);
+			getMaxPuntos();
 			cronometrar();
 		}
 	}
@@ -185,4 +190,20 @@ function cronometrar() {
 		partidaIniciada = true;
 		inicio();
 	}
+}
+
+function getMaxPuntos() {
+	let historial = JSON.parse(localStorage.getItem("partidas"));
+	if(historial != null) {
+		maxPuntos =  historial[0]._puntos;		
+	}
+	else {
+		maxPuntos = puntos;
+	}
+	setMaxPuntos();
+}
+
+function setMaxPuntos() {
+	let maxScore = document.getElementById("puntosMaxValue");
+	maxScore.innerHTML = maxPuntos;
 }

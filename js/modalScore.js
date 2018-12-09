@@ -69,7 +69,7 @@ function guardarPuntuacion() {
 function historialPartidas() {
     document.getElementById("modalTableScore").setAttribute("class", "modalDialog");
     let historial = JSON.parse(localStorage.getItem("partidas"));
-    ordenar(historial);
+    historial = ordenar(historial);
 
     historial.forEach(partida => {
         getPartida(Object.values(partida).toString());
