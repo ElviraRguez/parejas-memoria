@@ -31,21 +31,22 @@ body {
     grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
+.numPartidas, .maxPuntos, .puntos, .reloj {    
+    font-family: 'good-times';
+}
+
 /*PARTIDAS*/
 .numPartidas {
-    grid-area: numPartidas;    
-    font-family: good-times;
+    grid-area: numPartidas;   
 }
 
 /*PUNTOS*/
 .maxPuntos {
     grid-area: maxPuntos;
-    font-family: good-times;
 }
 
 .puntos {
     grid-area: puntos;
-    font-family: good-times;
 }
 
 /*CRONOMETRO*/
@@ -55,7 +56,6 @@ body {
 
 .reloj {
     display: inline;
-    font-family: 'good-times';
     font-weight: bold;
 }
 
@@ -105,6 +105,9 @@ body {
 
 .grid-item > input:disabled {
     opacity: 0.8;
+}
+
+.grid-item > input:disabled:hover {
     border: none;
     box-shadow: none;
 }

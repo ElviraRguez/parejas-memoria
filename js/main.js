@@ -148,11 +148,13 @@ function comprobarParejas() {
 					parejas[0].setAttribute("visible", false);
 					parejas[1].setAttribute("src", reverso);
 					parejas[1].setAttribute("visible", false);
-					bloquearPanel(false);
-					cronometrar();
+					setTimeout(function() {
+						bloquearPanel(false);
+						cronometrar();
+					}, 1000);
 				},
 				1000
-			);
+			);			
 		}
 		else {
 			parejasAcertadas.push(parejas[0].getAttribute("src"));
