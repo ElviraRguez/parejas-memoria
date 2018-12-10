@@ -36,8 +36,12 @@ function dificultad() {
 		case "tablaPuntuaciones":
 			historialPartidas();
 			break;
+		case "ayuda":
+			startIntro();
+			break;
 	}
-	document.getElementById("modal").setAttribute("class", "hide");
+	if(this.id != "ayuda")
+		document.getElementById("modal").setAttribute("class", "hide");
 }
 
 function generarCartas(valorDificultad, numImg, tematica) {	
@@ -208,4 +212,36 @@ function setMaxPuntos() {
 	maxScore.innerHTML = maxPuntos;
 }
 
-function help() {introJs().start();}
+function startIntro(){
+	var intro = introJs();
+	  intro.setOptions({
+		steps: [
+		  {
+			element: '#modal-body',
+			intro: "Seleccione un nivel de dificultad para jugar."
+		  },
+		  {
+			element: '#maxScore',
+			intro: "Puntuación máxima registrada."
+		  },
+		  {
+			element: '#score',
+			intro: 'Puntos obtenidos durante la partida.'
+		  },
+		  {
+			element: '#cronometro',
+			intro: "Tiempo de juego."
+		  },
+		  {
+			element: '#wrapper',
+			intro: 'Tablero de parejas, gira las cartas hasta encontrar todas las parejas.'
+		  }
+		],
+		nextLabel: 'Siguiente',
+		prevLabel: 'Anterior',
+		skipLabel: 'Omitir',
+		doneLabel: 'Hecho',
+		exitOnOverlayClick: false
+	  });
+	  intro.start();
+  }

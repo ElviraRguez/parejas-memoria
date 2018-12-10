@@ -54,7 +54,9 @@ function guardarPuntuacion() {
     document.getElementById("guardarJugador").onclick = function () {
         let nombreJugador = document.getElementById("nombreJugador").value;
         let fechaActual = new Date();
-        fechaActual = fechaActual.getDate() + "/" + (fechaActual.getMonth() +1) + "/" + fechaActual.getFullYear();
+        fechaActual = fechaActual.getDate() + "/" + (fechaActual.getMonth() + 1) + "/" + fechaActual.getFullYear();
+        console.log(nuevaPartida.value);
+        //if(nuevaPartida.value == "") {nuevaPartida.value = "Sin nombre";}
         webStorage(new Partida(nombreJugador, lblPuntos.innerHTML, lblTiempo.innerHTML, fechaActual));
         document.getElementById("modalScore").setAttribute("class", "hide");
         historialPartidas();
@@ -69,12 +71,14 @@ function guardarPuntuacion() {
 function historialPartidas() {
     document.getElementById("modalTableScore").setAttribute("class", "modalDialog");
     let historial = JSON.parse(localStorage.getItem("partidas"));
-    historial = ordenar(historial);
 
-    historial.forEach(partida => {
-        getPartida(Object.values(partida).toString());
-    });
-    
+    if (historial != null) {
+        historial = ordenar(historial);
+        historial.forEach(partida => {
+            getPartida(Object.values(partida).toString());
+        });
+    }
+
     document.getElementById("limpiar").onclick = function () {
         localStorage.clear();
         location.reload();
@@ -127,14 +131,14 @@ function ordenar(historial) {
             }
 
             if (historial[i]._puntos == historial[sig]._puntos) {
-                if (historial[i]._tiempo > historial[sig]._tiempo){
+                if (historial[i]._tiempo > historial[sig]._tiempo) {
                     intercambiar(historial, i, sig);
                 }
 
-                if(historial[i]._tiempo == historial[sig]._tiempo){
+                if (historial[i]._tiempo == historial[sig]._tiempo) {
                     let fecha = new Date(historial[i]._fecha);
                     let fechaSig = new Date(historial[sig]._fecha);
-                    if(fecha.getTime() < fechaSig.getTime()) {
+                    if (fecha.getTime() < fechaSig.getTime()) {
                         intercambiar(historial, i, sig);
                     }
                 }
