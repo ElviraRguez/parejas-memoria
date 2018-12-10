@@ -11,11 +11,13 @@ function grid() {
 	getMaxPuntos();
 
 	//NIVEL DIFICULTAD
-	let modal = document.getElementById("modal-body");
+	let modal = document.getElementById("dificultadBtn");
 	let buttons = modal.childNodes;
 	buttons.forEach(button => {
 		button.onclick = dificultad;
 	});
+	document.getElementById("tablaPuntuaciones").onclick = historialPartidas;
+	document.getElementById("ayuda").onclick = startIntro;
 }
 
 function dificultad() {
@@ -33,15 +35,8 @@ function dificultad() {
 			baraja.classList.add("dificil");
 			generarCartas(8, 32, coches);
 			break;
-		case "tablaPuntuaciones":
-			historialPartidas();
-			break;
-		case "ayuda":
-			startIntro();
-			break;
 	}
-	if (this.id != "ayuda")
-		document.getElementById("modal").setAttribute("class", "hide");
+	document.getElementById("modal").setAttribute("class", "hide");
 }
 
 function generarCartas(valorDificultad, numImg, tematica) {
@@ -220,8 +215,16 @@ function startIntro() {
 	intro.setOptions({
 		steps: [
 			{
-				element: '#modal-body',
+				element: '#dificultadBtn',
 				intro: "Seleccione un nivel de dificultad para jugar."
+			},
+			{
+				element: '#tablaPuntuaciones',
+				intro: "Visualiza la tabla de puntuaciones guardadas, en orden descendente."
+			},
+			{
+				element: '#numPartidas',
+				intro: "Número de partidas jugadas, guardadas y no guardadas."
 			},
 			{
 				element: '#maxScore',

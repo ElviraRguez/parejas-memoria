@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <!-- FAVICON ANIMADO -->
@@ -15,20 +16,25 @@
     <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
     <title> Encuentra la pareja </title>
 </head>
+
 <body>
     <!-- MODAL INICIAL ELEGIR DIFICULTAD -->
     <div id="modal" class="modalDialog">
         <div class="modal-content">
             <div class="modal-header"> Seleccione un nivel de dificultad </div>
             <div id="modal-body" class="modal-body">
-                <button id="facil" class="btn"> Fácil </button>
-                <button id="medio" class="btn"> Medio </button>
-                <button id="dificil" class="btn"> Dificil </button>
-                <hr>
-                <button id="tablaPuntuaciones" class="btn neutral"> Ver tabla de puntuaciones </button>
-                <button id="ayuda" class="btn neutral">
-                    <i class="fa fa-question-circle" aria-hidden="true"></i>
-                </button>
+                <div id="dificultadBtn" class="modal-body">
+                    <button id="facil" class="btn"> Fácil </button>
+                    <button id="medio" class="btn"> Medio </button>
+                    <button id="dificil" class="btn"> Dificil </button>
+                </div>
+                
+                <div id="otherBtn" class="modal-body">
+                    <button id="tablaPuntuaciones" class="btn neutral"> Ver tabla de puntuaciones </button>
+                    <button id="ayuda" class="btn neutral">
+                        <i class="fa fa-question-circle" aria-hidden="true"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -94,4 +100,5 @@
     <script src="plugin/introJS/intro.js"></script>
     <script src="js/main.js"></script>
 </body>
+
 </html>
