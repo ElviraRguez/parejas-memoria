@@ -40,12 +40,13 @@ function dificultad() {
 			startIntro();
 			break;
 	}
-	if(this.id != "ayuda")
+	if (this.id != "ayuda")
 		document.getElementById("modal").setAttribute("class", "hide");
 }
 
-function generarCartas(valorDificultad, numImg, tematica) {	
+function generarCartas(valorDificultad, numImg, tematica) {
 	cronometrar();
+	cargarNumPartidas();
 	let parentElement = document.getElementById("wrapper");
 	let numElements = valorDificultad * valorDificultad;
 	let listaImagenes = imagenes(numImg, tematica);
@@ -59,8 +60,8 @@ function generarCartas(valorDificultad, numImg, tematica) {
 		let img = document.createElement('INPUT');
 		img.setAttribute("type", "image");
 		img.setAttribute("src", reverso);
-		img.setAttribute("visible", false);		
-		img.onclick = function () {			
+		img.setAttribute("visible", false);
+		img.onclick = function () {
 			if (img.getAttribute("visible") == "false") {
 				img.setAttribute("src", listaImagenes[i]);
 				img.setAttribute("visible", true);
@@ -69,8 +70,8 @@ function generarCartas(valorDificultad, numImg, tematica) {
 
 			comprobarParejas();
 			scorePartida();
-						
-			if(parejasAcertadas.length == numImg) {
+
+			if (parejasAcertadas.length == numImg) {
 				cronometrar();
 				guardarPuntuacion();
 			}
@@ -186,11 +187,11 @@ function scorePartida() {
 
 //CRONOMETRO(EL EL FICHERO CRONOMETRO.JS)
 function cronometrar() {
-	if(partidaIniciada) {
+	if (partidaIniciada) {
 		partidaIniciada = false;
 		parar();
 	}
-	else {		
+	else {
 		partidaIniciada = true;
 		inicio();
 	}
@@ -198,8 +199,8 @@ function cronometrar() {
 
 function getMaxPuntos() {
 	let historial = JSON.parse(localStorage.getItem("partidas"));
-	if(historial != null) {
-		maxPuntos =  historial[0]._puntos;		
+	if (historial != null) {
+		maxPuntos = historial[0]._puntos;
 	}
 	else {
 		maxPuntos = puntos;
@@ -212,36 +213,49 @@ function setMaxPuntos() {
 	maxScore.innerHTML = maxPuntos;
 }
 
-function startIntro(){
+function startIntro() {
 	var intro = introJs();
-	  intro.setOptions({
+	intro.setOptions({
 		steps: [
-		  {
-			element: '#modal-body',
-			intro: "Seleccione un nivel de dificultad para jugar."
-		  },
-		  {
-			element: '#maxScore',
-			intro: "Puntuación máxima registrada."
-		  },
-		  {
-			element: '#score',
-			intro: 'Puntos obtenidos durante la partida.'
-		  },
-		  {
-			element: '#cronometro',
-			intro: "Tiempo de juego."
-		  },
-		  {
-			element: '#wrapper',
-			intro: 'Tablero de parejas, gira las cartas hasta encontrar todas las parejas.'
-		  }
+			{
+				element: '#modal-body',
+				intro: "Seleccione un nivel de dificultad para jugar."
+			},
+			{
+				element: '#maxScore',
+				intro: "Puntuación máxima registrada."
+			},
+			{
+				element: '#score',
+				intro: 'Puntos obtenidos durante la partida.'
+			},
+			{
+				element: '#cronometro',
+				intro: "Tiempo de juego."
+			},
+			{
+				element: '#wrapper',
+				intro: 'Tablero de parejas, gira las cartas hasta encontrar todas las parejas.'
+			}
 		],
 		nextLabel: 'Siguiente',
 		prevLabel: 'Anterior',
 		skipLabel: 'Omitir',
 		doneLabel: 'Hecho',
 		exitOnOverlayClick: false
-	  });
-	  intro.start();
-  }
+	});
+	intro.start();
+}
+
+function cargarNumPartidas() {
+	let clave = "numPartidas";
+	let numPartidas = localStorage.getItem(clave);
+	if (numPartidas == null) {
+		numPartidas = 1;
+	}
+	else {
+		numPartidas++;
+	}
+	localStorage.setItem(clave, numPartidas);
+	document.getElementById("numPartidasValue").innerHTML = numPartidas;
+}

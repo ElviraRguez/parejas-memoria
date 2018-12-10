@@ -55,8 +55,11 @@ function guardarPuntuacion() {
         let nombreJugador = document.getElementById("nombreJugador").value;
         let fechaActual = new Date();
         fechaActual = fechaActual.getDate() + "/" + (fechaActual.getMonth() + 1) + "/" + fechaActual.getFullYear();
-        console.log(nuevaPartida.value);
-        //if(nuevaPartida.value == "") {nuevaPartida.value = "Sin nombre";}
+
+        if(nombreJugador == "") {
+            nombreJugador = "Sin nombre";
+        }
+        console.log(nombreJugador);
         webStorage(new Partida(nombreJugador, lblPuntos.innerHTML, lblTiempo.innerHTML, fechaActual));
         document.getElementById("modalScore").setAttribute("class", "hide");
         historialPartidas();
@@ -89,7 +92,7 @@ function historialPartidas() {
     };
 }
 
-//LOCALSTORAGE
+//LOCALSTORAGE HISTORIAL PARTIDAS GUARDADAS
 function webStorage(valor) {
     let clave = "partidas";
     let webStorage = JSON.parse(localStorage.getItem(clave));

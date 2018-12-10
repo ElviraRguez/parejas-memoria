@@ -3,11 +3,13 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="shortcut icon" href="img/favicon.gif" type="image.gif">
+
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" media="(min-width: 1280px) and (max-width: 1400px) and (orientation: landscape)" href="css/mediumWindows.css" />
     <link rel="stylesheet" media="(min-width: 1024px) and (max-width: 1280px) and (orientation: landscape)" href="css/smallWindows.css" />
     <link rel="stylesheet" media="(max-width: 1024px) or (orientation: portrait)" href="css/verticalWindows.css" />
-    
+
     <link rel="stylesheet" href="plugin/introJS/introjs.css">
     <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
     <title> Encuentra la pareja </title>
@@ -61,17 +63,18 @@
             <div class="modal-header"> Tabla de puntuaciones </div>
             <div id="modalTableScoreBody" class="modal-tscore-body">
                 <div id="tPartidas" class="modal-tscore-body"></div>
-                <div class='tPartidas footer'>
-                    <div></div>
-                    <button id='limpiar' class='btn cancel'>Limpiar puntuaciones</button>
-                    <button id='cerrar' class='btn cancel'>Cerrar</button>                    
-                    <div></div>
+                <div class='footer'>
+                    <button id='limpiar' class='btn cancel'>Limpiar historial partidas</button>
+                    <button id='cerrar' class='btn cancel'>Cerrar</button>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="container">
+        <div id="numPartidas" class="numPartidas">
+            Partida nº: <span id="numPartidasValue"></span>
+        </div>
         <div id="maxScore" class="maxPuntos">
             Puntuación Max.: <span id="puntosMaxValue">0</span>
         </div>
@@ -91,4 +94,5 @@
     <script src="plugin/introJS/intro.js"></script>
     <script src="js/main.js"></script>
 </body>
+
 </html>

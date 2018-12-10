@@ -26,9 +26,15 @@ body {
     display: grid;
     text-align: center;
     gap: 10px;
-    grid-template-areas: "maxPuntos puntos cronometro"
-                         "baraja baraja baraja";
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: "numPartidas maxPuntos puntos cronometro"
+                         "baraja baraja baraja baraja";
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+/*PARTIDAS*/
+.numPartidas {
+    grid-area: numPartidas;    
+    font-family: good-times;
 }
 
 /*PUNTOS*/
@@ -179,6 +185,7 @@ body {
 .tPartidas {
     grid-auto-flow: column;    
     display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
 }
 
 /*BOTONES*/
