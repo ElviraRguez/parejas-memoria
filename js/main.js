@@ -237,10 +237,6 @@ function startIntro() {
 			{
 				element: '#cronometro',
 				intro: "Tiempo de juego."
-			},
-			{
-				element: '#wrapper',
-				intro: 'Tablero de parejas, gira las cartas hasta encontrar todas las parejas.'
 			}
 		],
 		nextLabel: 'Siguiente',

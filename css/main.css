@@ -73,15 +73,12 @@ body {
 
 .grid-item {
     grid-column-start: auto;
-    grid-row-start: auto;     
+    grid-row-start: auto;    
 }
 
 .grid-item > input[type='image'] {
     background: white;    
-    border-radius: 12px; 
-    
-    -webkit-animation: rotate 2s linear 0s 1 normal ;
-    animation: rotate 2s linear 0s 1 normal ;
+    border-radius: 12px;    
 }
 
 .grid-item > input[visible='false']:hover {
