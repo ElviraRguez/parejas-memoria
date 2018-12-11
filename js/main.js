@@ -21,18 +21,14 @@ function grid() {
 }
 
 function dificultad() {
-	let baraja = document.getElementById("wrapper");
 	switch (this.id) {
 		case "facil":
-			baraja.classList.add("facil");
 			generarCartas(4, 8, frutas);
 			break;
 		case "medio":
-			baraja.classList.add("medio");
 			generarCartas(6, 18, pokemon);
 			break;
 		case "dificil":
-			baraja.classList.add("dificil");
 			generarCartas(8, 32, coches);
 			break;
 	}
@@ -42,40 +38,58 @@ function dificultad() {
 function generarCartas(valorDificultad, numImg, tematica) {
 	cronometrar();
 	cargarNumPartidas();
+
 	let parentElement = document.getElementById("wrapper");
 	let numElements = valorDificultad * valorDificultad;
 	let listaImagenes = imagenes(numImg, tematica);
 
 	for (let i = 0; i < numElements; i++) {
-		let item = document.createElement('DIV');
-		item.setAttribute("class", "grid-item");
-		parentElement.appendChild(item);
-
-		//IMG		
 		let img = document.createElement('INPUT');
 		img.setAttribute("type", "image");
-		img.setAttribute("src", reverso);
+		img.setAttribute("class", "imagenCarta");
 		img.setAttribute("visible", false);
-		img.onclick = function () {
-			if (img.getAttribute("visible") == "false") {
-				img.setAttribute("src", listaImagenes[i]);
-				img.setAttribute("visible", true);
-				numImgVisibles++;
-			}
+		img.setAttribute("src", listaImagenes[i]);
+		carta(parentElement, img, numImg);
+	}
+
+	parentElement.style.setProperty('--rowNum', valorDificultad);
+	parentElement.style.setProperty('--colNum', valorDificultad);
+}
+
+function carta(contenedor, img, numImg) {
+	let carta = document.createElement('DIV');
+	carta.setAttribute("class", "carta");
+	contenedor.appendChild(carta);
+
+	let front = document.createElement('DIV');
+	front.setAttribute("class", "front face");
+	carta.appendChild(front);
+	front.appendChild(img);
+
+	let back = document.createElement('DIV');
+	back.setAttribute("class", "back face");
+	carta.appendChild(back);
+
+	let imgReverso = document.createElement('INPUT');
+	imgReverso.setAttribute("type", "image");
+	imgReverso.setAttribute("src", "img/reverso.png");
+	back.appendChild(imgReverso);
+
+	carta.onclick = function () {
+		if (img.getAttribute("visible") == "false") {
+			carta.classList.add("mostrar");
+			img.setAttribute("visible", true);
+			numImgVisibles++;
 
 			comprobarParejas();
 			scorePartida();
 
 			if (parejasAcertadas.length == numImg) {
 				cronometrar();
-				guardarPuntuacion();
+				guardarPuntuacion(); //Función del fichero modalScore.js
 			}
 		}
-		item.appendChild(img);
 	}
-
-	parentElement.style.setProperty('--rowNum', valorDificultad);
-	parentElement.style.setProperty('--colNum', valorDificultad);
 }
 
 function imagenes(numImg, tematica) {
@@ -124,7 +138,7 @@ function comprobarParejas() {
 		let parejas = [];
 		numImgVisibles = 0;
 
-		let imagenes = document.getElementsByTagName("INPUT");
+		let imagenes = document.getElementsByClassName("imagenCarta");
 		for (let i = 0; i < imagenes.length; i++) {
 			if (!parejasAcertadas.includes(imagenes[i].getAttribute("src")) & imagenes[i].getAttribute("visible") == "true") {
 				parejas.push(imagenes[i]);
@@ -139,17 +153,14 @@ function comprobarParejas() {
 
 			setTimeout(
 				function () {
-					parejas[0].setAttribute("src", reverso);
-					parejas[0].setAttribute("visible", false);
-					parejas[1].setAttribute("src", reverso);
-					parejas[1].setAttribute("visible", false);
-					setTimeout(function() {
+					girarParejas(parejas[0], parejas[1]);
+					setTimeout(function () {
 						bloquearPanel(false);
 						cronometrar();
 					}, 1000);
 				},
 				1000
-			);			
+			);
 		}
 		else {
 			parejasAcertadas.push(parejas[0].getAttribute("src"));
@@ -161,17 +172,28 @@ function comprobarParejas() {
 	}
 }
 
+function girarParejas(pareja1, pareja2) {
+	pareja1.closest(".carta").classList.remove("mostrar");
+	pareja1.classList.add("ocultar");
+	pareja1.setAttribute("visible", false);
+
+	pareja2.closest(".carta").classList.remove("mostrar");
+	pareja2.classList.add("ocultar");
+	pareja2.setAttribute("visible", false);
+}
+
 function getAleatorio(tematica) {
 	return Math.floor(Math.random() * (tematica.length - 0));
 }
 
-function ocultarImagenes(parejas) {
-	parejas[0].setAttribute("src", reverso);
-	parejas[1].setAttribute("src", reverso);
-}
-
 function bloquearPanel(bloquear) {
-	let imagenes = document.getElementsByTagName("INPUT");
+	let tablero = document.getElementById("wrapper");
+	if (bloquear)
+		tablero.classList.add("bloquear");
+	else
+		tablero.classList.remove("bloquear");
+
+	let imagenes = document.getElementsByClassName("imagenCarta");
 	for (let i = 0; i < imagenes.length; i++) {
 		imagenes[i].disabled = bloquear;
 	}
@@ -210,6 +232,19 @@ function setMaxPuntos() {
 	maxScore.innerHTML = maxPuntos;
 }
 
+function cargarNumPartidas() {
+	let clave = "numPartidas";
+	let numPartidas = localStorage.getItem(clave);
+	if (numPartidas == null) {
+		numPartidas = 1;
+	}
+	else {
+		numPartidas++;
+	}
+	localStorage.setItem(clave, numPartidas);
+	document.getElementById("numPartidasValue").innerHTML = numPartidas;
+}
+
 function startIntro() {
 	var intro = introJs();
 	intro.setOptions({
@@ -246,17 +281,4 @@ function startIntro() {
 		exitOnOverlayClick: false
 	});
 	intro.start();
-}
-
-function cargarNumPartidas() {
-	let clave = "numPartidas";
-	let numPartidas = localStorage.getItem(clave);
-	if (numPartidas == null) {
-		numPartidas = 1;
-	}
-	else {
-		numPartidas++;
-	}
-	localStorage.setItem(clave, numPartidas);
-	document.getElementById("numPartidasValue").innerHTML = numPartidas;
 }

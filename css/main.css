@@ -12,13 +12,21 @@
     src: url('fonts/good_times/good_times_rg-webfont.eot');
     src: url('fonts/good_times/good_times_rg-webfont.eot?#iefix') format('embedded-opentype'),
          url('fonts/good_times/good_times_rg-webfont.woff2') format('woff2'),
-         url('fonts/good_times/good_times_rg-webfont.woff') format('woff'),         
+         url('fonts/good_times/good_times_rg-webfont.woff') format('woff'), 
+         url('fonts/good_times/good_times_rg.ttf') format('truetype'),      
          url('fonts/good_times/good_times_rg-webfont.svg#goodtimes') format('svg');
+}
+
+html {
+    height: 100%;
 }
 
 /*CUERPO*/
 body {
-    margin: 10px;
+    background: #A770EF;
+    background: -webkit-linear-gradient(to bottom, #FDB99B, #CF8BF3, #A770EF);
+    background: linear-gradient(to bottom, #FDB99B, #CF8BF3, #A770EF); 
+    background-repeat: no-repeat;   
 }
 
 /*CONTAINER ELEMENTS*/
@@ -59,7 +67,7 @@ body {
     font-weight: bold;
 }
 
-/* GRID */
+/* TABLERO */
 .wrapper {
     grid-area: baraja;
     padding: 2%;
@@ -68,48 +76,71 @@ body {
     justify-content: center;
     grid-template-rows: repeat(var(--rowNum), var(--gridHeight));
     grid-template-columns: repeat(var(--colNum), var(--gridWidht));
-    gap: 30px;
+    gap: 20px;
 }
 
-.grid-item {
+/* CARTAS */
+.carta {
     grid-column-start: auto;
-    grid-row-start: auto;    
+    grid-row-start: auto; 
+    
+    position: relative;
+    transform-style: preserve-3d;
+    transition: 1s;
+    width: var(--gridWidht);
+    height: var(--gridHeight);
 }
 
-.grid-item > input[type='image'] {
+/* IMAGEN FRONT CARTA */
+input[type='image'] {
     background: white;    
-    border-radius: 12px;    
+    border-radius: 12px;     
 }
 
-.grid-item > input[visible='false']:hover {
+.face {
+    position: absolute;
+    width: var(--gridWidht);
+    height: var(--gridHeight);
+    backface-visibility: hidden;
+}
+
+.back {
+    transform: rotateY(0deg) scale(1);
+}
+
+/* ANIMACIONES CARTA GIRAR Y CRECER */
+.mostrar {
+    transform: rotateY(180deg) scale(1.12);
+    -ms-transform: rotateY(180deg) scale(1.12); /* IE 9  */
+    -moz-transform: rotateY(180deg) scale(1.12); /* Firefox */
+    -webkit-transform: rotateY(180deg) scale(1.12); /* Safari and Chrome */
+    -o-transform: rotateY(180deg) scale(1.12); /* Opera */
+}
+
+.ocultar {
+    transform: rotateY(0deg) scale(1);
+    -ms-transform: rotateY(0deg) scale(1); /* IE 9  */
+    -moz-transform: rotateY(0deg) scale(1); /* Firefox */
+    -webkit-transform: rotateY(0deg) scale(1); /* Safari and Chrome */
+    -o-transform: rotateY(0deg) scale(1); /* Opera */
+}
+
+.back input[type='image']:hover {
     border: 2px solid darkviolet;    
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
-.grid-item > input[visible='false'] {    
-    transition: transform 1s linear;
-}
-
-.grid-item > input[visible='true'] {
-    transition: transform 1s linear;
-
-    transform:scale(1.2);
-    -ms-transform:scale(1.2); /* IE 9  */
-    -moz-transform:scale(1.2); /* Firefox */
-    -webkit-transform:scale(1.2); /* Safari and Chrome */
-    -o-transform:scale(1.2); /* Opera */
-}
-
-.grid-item > input:disabled {
+/* BLOQUEO TABLERO */
+.wrapper.bloquear {
     opacity: 0.8;
 }
 
-.grid-item > input:disabled:hover {
+.bloquear input[type='image']:hover {
     border: none;
     box-shadow: none;
 }
 
-/* MODAL INICIAL */
+/* MODAL */
 .modalDialog {
     display: block;
     position: fixed;
@@ -119,10 +150,7 @@ body {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,.8);
-    -webkit-transition: opacity 400ms ease-in;
-	-moz-transition: opacity 400ms ease-in;
-	transition: opacity 400ms ease-in;
+    background-color: rgba(0, 0, 0, .6);
 }
 
 .hide {
@@ -130,7 +158,7 @@ body {
 }
 
 .modal-content {
-    width: 60%; /*TAMAÑOS PEQUEÑOS SUBIR A 80% */
+    width: 60%;
     margin: 5% auto;
     border-radius: 5px;
     background: #fff;

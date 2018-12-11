@@ -11,19 +11,19 @@
 
 /* GRID */
 .wrapper {
-    padding: 2%;
-    gap: 20px;
+    padding: 3%;
+    gap: 18px;
 }
 
-.grid-item > input[type='image']{
+.mostrar {
+    transform: rotateY(180deg) scale(1.15);
+    -ms-transform: rotateY(180deg) scale(1.15); /* IE 9  */
+    -moz-transform: rotateY(180deg) scale(1.15); /* Firefox */
+    -webkit-transform: rotateY(180deg) scale(1.15); /* Safari and Chrome */
+    -o-transform: rotateY(180deg) scale(1.15); /* Opera */
+}
+
+input[type='image'] {
     height: var(--gridHeight);
     width: var(--gridWidht);
-}
-
-.grid-item > input[visible='true'] {
-    transform:scale(1.15);
-    -ms-transform:scale(1.15); /* IE 9  */
-    -moz-transform:scale(1.15); /* Firefox */
-    -webkit-transform:scale(1.15); /* Safari and Chrome */
-    -o-transform:scale(1.15); /* Opera */
 }

@@ -15,9 +15,17 @@
     gap: 18px;
 }
 
-.grid-item > input[type='image']{
-    height: var(--gridHeight);
+.carta input[type='image'] {
     width: var(--gridWidht);
+    height: var(--gridHeight);
+}
+
+.mostrar {
+    transform: rotateY(180deg) scale(1.2);
+    -ms-transform: rotateY(180deg) scale(1.2); /* IE 9  */
+    -moz-transform: rotateY(180deg) scale(1.2); /* Firefox */
+    -webkit-transform: rotateY(180deg) scale(1.2); /* Safari and Chrome */
+    -o-transform: rotateY(180deg) scale(1.2); /* Opera */
 }
 
 /*BOTONES*/
