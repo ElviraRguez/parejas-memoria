@@ -101,11 +101,11 @@ input[type='image'] {
     position: absolute;
     width: var(--gridWidht);
     height: var(--gridHeight);
-    backface-visibility: hidden;
 }
 
 .back {
     transform: rotateY(0deg) scale(1);
+    backface-visibility: hidden;
 }
 
 /* ANIMACIONES CARTA GIRAR Y CRECER */
